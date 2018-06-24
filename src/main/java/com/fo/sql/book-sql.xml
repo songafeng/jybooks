@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.fo.dao.BookDao">
+
+    <parameterMap id="parameterMap" type="com.fo.entity.book"></parameterMap>
+    <resultMap id="resultMap" type="com.fo.entity.book">
+        <result property="id" column="n_id"/>
+        <result property="name" column="s_name"/>
+        <result property="profile" column="s_profile"/>
+        <result property="type" column="n_type"/>
+        <result property="remark" column="s_remark"/>
+        <result property="chapternum" column="n_chapternum"/>
+        <result property="url" column="s_url"/>
+        <result property="size" column="n_size"/>
+        <result property="sort" column="n_sort"/>
+        <result property="create_time" column="d_create_time"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.n_id,
+            t.s_name,
+            t.s_profile,
+            t.n_type,
+            t.s_remark,
+            t.n_chapternum,
+            t.s_url,
+            t.n_size,
+            t.n_sort,
+            t.d_create_time
+        </trim>
+    </sql>
+
+    <select id="findById" resultMap="resultMap">
+        SELECT
+        <include refid="columnSql"></include>
+        FROM jy_book t
+        WHERE t.n_id = #{id}
+    </select>
+
+    <select id="findByType" resultMap="resultMap">
+        SELECT
+        <include refid="columnSql"></include>
+        FROM jy_book t
+        WHERE t.n_type = #{type}
+    </select>
+
+</mapper>

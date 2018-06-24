@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.fo.dao.VersionDao">
+
+    <parameterMap id="parameterMap" type="com.fo.entity.version"></parameterMap>
+    <resultMap id="resultMap" type="com.fo.entity.version">
+        <result property="id" column="n_id"/>
+        <result property="client_type" column="n_client_type"/>
+        <result property="version" column="n_version"/>
+        <result property="create_time" column="d_create_time"/>
+        <result property="status" column="n_status"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.n_id,
+            t.n_client_type,
+            t.n_version,
+            t.d_create_time,
+            t.n_status
+        </trim>
+    </sql>
+
+    <select id="findByType" resultMap="resultMap">
+        SELECT
+        <include refid="columnSql"></include>
+        FROM jy_version t
+        WHERE t.n_client_type = #{type} and n_status=1
+        ORDER BY n_version DESC limit 1
+    </select>
+
+</mapper>

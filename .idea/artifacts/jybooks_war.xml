@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jybooks:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="jybook.war">
+      <element id="artifact" artifact-name="jybooks:war exploded" />
+    </root>
+  </artifact>
+</component>
