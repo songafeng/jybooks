@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.fo.dao.ImageDao">
+
+    <parameterMap id="parameterMap" type="com.fo.entity.image"></parameterMap>
+
+    <resultMap id="resultMap" type="com.fo.entity.image">
+        <result property="id" column="n_id"/>
+        <result property="path" column="s_path"/>
+        <result property="url" column="s_url"/>
+        <result property="place" column="s_place"/>
+        <result property="sort" column="n_sort"/>
+        <result property="createtime" column="d_createtime"/>
+        <result property="status" column="n_status"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.n_id,
+            t.s_path,
+            t.s_url,
+            t.s_place,
+            t.n_sort,
+            t.d_createtime,
+            t.n_status
+        </trim>
+    </sql>
+
+    <select id="findSingleByPlace" resultMap="resultMap">
+        SELECT
+        <include refid="columnSql"></include>
+        FROM jy_image t
+        WHERE t.s_place = #{place} and n_status=1
+        ORDER BY n_sort limit 1
+    </select>
+
+    <select id="findByPlace" resultMap="resultMap">
+        SELECT
+        <include refid="columnSql"></include>
+        FROM jy_image t
+        WHERE t.s_place = #{place} and n_status=1
+        ORDER BY n_sort
+    </select>
+
+</mapper>
