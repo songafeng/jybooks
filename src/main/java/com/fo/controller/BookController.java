@@ -23,6 +23,14 @@ public class BookController {
     @Resource(name = "BookService")
     private BookService bookService;
 
+
+    @RequestMapping("/index")
+    public String index()
+    {
+        return "index";
+    }
+
+
     @RequestMapping("/book")
     public String book()
     {
